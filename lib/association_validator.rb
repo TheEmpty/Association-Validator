@@ -13,7 +13,7 @@ class AssociationValidator < ActiveModel::EachValidator
     begin
       valid = c.find(value, :select => 'id') # activerecord will raise an exception if it's not found, so we're going to catch it
     rescue 
-      record.errors[attribute] = "is a non existent record" # and report that it doesn't exist
+      record.errors[attribute] = (options[:message] || "is a non existent record") # and report that it doesn't exist
     end
   end
 end
