@@ -2,16 +2,16 @@
 
 Gem::Specification.new do |s|
   s.name = %q{association_validator}
-  s.version = "0.6.0"
+  s.version = "0.6.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Mohammad El-Abid"]
-  s.date = %q{2011-03-23}
+  s.date = %q{2011-03-24}
   s.description = %q{Rails 3 assocation validation for id fields}
   s.email = %q{mohammad {dot} elabid {at} gmail}
   s.extra_rdoc_files = ["README.textile", "README.txt", "lib/association_validator.rb"]
   s.files = ["Manifest", "README.textile", "README.txt", "Rakefile", "association_validator.gemspec", "lib/association_validator.rb"]
-  s.homepage = %q{http://github.com/TheEmpty}
+  s.homepage = %q{http://rubygems.org/gems/association_validator}
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Association_validator", "--main", "README.textile"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{association_validator}

@@ -7,14 +7,15 @@ validates :user_id, :presence => true, :association => true</code></pre>
 You can also set the message using the :message option:
 <pre><code>validates :user_id, :association => {:message => 'was unretrievable'}</code></pre>
 
-For polymorphic classes, pass your class_name option as a proc:
+For polymorphic classes, pass your class_name option as a proc or use the new polymorphic_class option
 <pre><code>class Item < ActiveRecord::Base
-  validates :owner_id, :presence => true, :association => {:class_name => Proc.new {|r| r.owner_type}}
+  # The new way to do polymorphic resource validation
+  validates :owner_id, :presence => true, :association => {:polymorphic_class => 'owner_type'}
+  # it calls record.send(:polymorphic_class)
+
+  # If for some odd reasson you need to use a proc:
+  validates :user_id, :presence => true, :association => {:class_name => Proc.new {|r| r.user_type || "User" }}
 end</code></pre>
-<pre><code>== Schema Information
-Table name: items
-  owner_id   :integer
-  owner_type :string</code></pre>
 
 h1. How to install
 

@@ -6,14 +6,15 @@ Validate that the id field is a saved record. It will ignore blank fields, so us
 You can also set the message using the :message option:
     validates :user_id, :association => {:message => 'was unretrievable'}
 	
-For polymorphic classes, pass your class_name option as a proc:
+For polymorphic classes, pass your class_name option as a proc or use the new polymorphic_class option
     class Item < ActiveRecord::Base
-      validates :owner_id, :presence => true, :association => {:class_name => Proc.new {|r| r.owner_type}}
+      # The new way to do polymorphic resource validation
+      validates :owner_id, :presence => true, :association => {:polymorphic_class => 'owner_type'}
+      # it calls record.send(:polymorphic_class)
+
+      # If for some odd reasson you need to use a proc:
+      validates :user_id, :presence => true, :association => {:class_name => Proc.new {|r| r.user_type || "User" }}
     end
-    # == Schema Information
-    # Table name: items
-    #  owner_id   :integer
-    #  owner_type :string
 
 === How to install
 Add the following line to your Gemfile and install.
