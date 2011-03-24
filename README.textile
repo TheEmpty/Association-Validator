@@ -7,6 +7,14 @@ validates :user_id, :presence => true, :association => true</code></pre>
 You can also set the message using the :message option:
 <pre><code>validates :user_id, :association => {:message => 'was unretrievable'}</code></pre>
 
+For polymorphic classes, pass your class_name option as a proc:
+<pre><code>class Item < ActiveRecord::Base
+  validates :owner_id, :presence => true, :association => {:class_name => Proc.new {|r| r.owner_type}}
+end
+# == Schema Information
+# Table name: items
+#  owner_id   :integer
+#  owner_type :string</code></pre>
 
 h1. How to install
 

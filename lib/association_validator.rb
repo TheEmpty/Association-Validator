@@ -5,8 +5,12 @@ class AssociationValidator < ActiveModel::EachValidator
 	if options[:class_name].blank?
       attribute_string = attribute.to_s
       attribute_string[-3,3] = ''
-    else
+    elsif options[:class_name].is_a?(String)
       attribute_string = options[:class_name]
+	elsif options[:class_name].is_a?(Proc)
+	  attribute_string = options[:class_name].yield(record)
+	else
+	  raise "Association Validator does not support a(n) #{options[:class_name].class.to_s.humanize} as a class_name option"
     end
     
     c  = attribute_string.camelize.constantize # create a refrence to the class
